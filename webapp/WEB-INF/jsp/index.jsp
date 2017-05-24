@@ -48,7 +48,7 @@
 					</ul>
 				</div>
 				<div class="col-md-3 qna-write">
-					<a href="/questions/new" class="btn btn-primary pull-right" role="button">여기 바꼈어요?</a>
+					<a href="/questions/new" class="btn btn-primary pull-right" role="button">진짜 바꼈어요?</a>
 				</div>
 			</div>
 		</div>
