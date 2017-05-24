@@ -48,7 +48,7 @@
 					</ul>
 				</div>
 				<div class="col-md-3 qna-write">
-					<a href="/questions/new" class="btn btn-primary pull-right" role="button">3단계 반영됨?</a>
+					<a href="/questions/new" class="btn btn-primary pull-right" role="button">라스트 라스트~~</a>
 				</div>
 			</div>
 		</div>
