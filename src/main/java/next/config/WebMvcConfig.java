@@ -11,12 +11,14 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import core.web.argumentresolver.LoginUserHandlerMethodArgumentResolver;
+import next.interceptor.ProfilingInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -26,6 +28,18 @@ import core.web.argumentresolver.LoginUserHandlerMethodArgumentResolver;
 )
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private static final int CACHE_PERIOD = 31556926; // one year
+    
+    @Bean
+    public ProfilingInterceptor profilingInterceptor() {
+    	return new ProfilingInterceptor();
+    }
+    
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//    	registry.addInterceptor(profilingInterceptor())
+//    		.addPathPatterns("/**")
+//    		.excludePathPatterns("/users/**");
+//    }
     
     @Bean
     public ViewResolver viewResolver() {

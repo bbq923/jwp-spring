@@ -3,6 +3,19 @@ package next.controller.qna;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.common.collect.Maps;
+
+import core.web.argumentresolver.LoginUser;
 import next.CannotOperateException;
 import next.dao.AnswerDao;
 import next.dao.QuestionDao;
@@ -11,19 +24,6 @@ import next.model.Question;
 import next.model.Result;
 import next.model.User;
 import next.service.QnaService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.google.common.collect.Maps;
-
-import core.web.argumentresolver.LoginUser;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -45,6 +45,18 @@ public class ApiQuestionController {
 		} catch (CannotOperateException e) {
 			return Result.fail(e.getMessage());
 		}
+	}
+	
+	@RequestMapping(value="/{questionId}", method=RequestMethod.GET)
+	public Question findQuestion(@PathVariable long questionId) throws Exception {
+		log.debug("ques id : {}", questionId);
+		return qnaService.findById(questionId);
+	}
+	
+	@RequestMapping(value="", method=RequestMethod.POST)
+	public void addQuestion(@RequestBody Question question) {
+		log.debug("new question : {}", question);
+		questionDao.insert(question);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)

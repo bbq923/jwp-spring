@@ -4,6 +4,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 	public static final GuestUser GUEST_USER = new GuestUser();
 
@@ -27,6 +30,10 @@ public class User {
 		this.password = password;
 		this.name = name;
 		this.email = email;
+	}
+	
+	public User(String userId, String password) {
+		this(userId, password, null, null);
 	}
 
 	public String getUserId() {

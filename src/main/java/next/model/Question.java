@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Question {
 	private long questionId;
 
